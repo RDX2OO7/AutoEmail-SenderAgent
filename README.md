@@ -15,6 +15,7 @@ To ensure the pipeline runs smoothly, keep the following file names and folder s
 | **Certificate Template** | `template.pdf` | Base PDF certificate template (A4 Landscape format recommended: 842 × 595 points). |
 | **Environment Config** | `.env` | Created from `.env.example`. Contains private Gmail SMTP credentials. |
 | **Requirements** | `requirements.txt` | Python package dependencies (`pymupdf`, `pandas`, `python-dotenv`, `reportlab`, `pillow`). |
+| **One-Click Runner** | `run.bat` | Windows batch script to run the full pipeline in one click. |
 | **Output Directory** | `output/` | Directory where generated student certificate PDFs are stored (`<Student_Name>.pdf`). |
 | **Dispatch Audit Log** | `send_log.csv` | Log file generated during email sending to record success/failure status. |
 
@@ -42,33 +43,45 @@ GMAIL_APP_PASSWORD=xxxx_xxxx_xxxx_xxxx
 
 ---
 
-## 🚀 How to Run
+## 🚀 How to Run (Single Command / One Click)
 
-### Method 1: Run Full Pipeline (Recommended)
-Executes data cleaning, certificate generation, and email dispatch in sequence:
+### Option 1: Double-Click `run.bat` (Windows One-Click)
+Simply double-click **`run.bat`** in File Explorer, or run in terminal:
+```cmd
+.\run.bat
+```
+
+### Option 2: Python Command
+Run the master orchestrator script:
 ```bash
 python main.py
 ```
 
-### Method 2: Run Individual Steps
+> **What happens when you run `main.py` or `run.bat`?**
+> 1. Automatically cleans and validates `students.csv` -> generates `students_clean.csv`.
+> 2. Automatically generates personalized PDF certificates for all students into `output/`.
+> 3. Automatically emails each student their certificate via Gmail SMTP and logs the results in `send_log.csv`.
+
+---
+
+### Option 3: Run Individual Steps (Manual)
+
+If you ever want to run a specific step independently:
 
 1. **Clean & Validate Input CSV**:
    ```bash
    python clean_data.py
    ```
-   Reads `students.csv`, removes invalid emails/duplicates, and saves `students_clean.csv`.
 
 2. **Generate Certificate PDFs**:
    ```bash
    python generate_certificates.py
    ```
-   Overlays student names on `template.pdf` and outputs individual PDFs to `output/`.
 
 3. **Send Emails with Attachments**:
    ```bash
    python send_emails.py
    ```
-   Sends emails with generated PDF certificates attached and records execution logs in `send_log.csv`.
 
 ---
 
