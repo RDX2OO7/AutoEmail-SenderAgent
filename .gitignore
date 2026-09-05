@@ -1,0 +1,27 @@
+# Environment & secret credentials
+.env
+*.env
+!.env.example
+
+# Python virtual environments & build files
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Templates & preview images
+template.pdf
+*.png
+
+# Generated email/certificate outputs & send logs
+output/
+send_log.csv
+
+# IDE and OS metadata
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
