@@ -110,7 +110,7 @@ NAME_Y = 270.0  # Vertical position down from top of the page
   1. Go to Photopea and open your `template.pdf` or certificate image.
   2. Open **Info Panel** (*Window -> Info*).
   3. Hover your mouse cursor over the exact baseline where student names should appear.
-  4. Note the pixel dimensions `(X_px, Y_px)` and the total image size `(Width_px, Height_px)`.
+  4. Note the pixel dimensions `(X_px, Y_px)` and total image size `(Image_Width, Image_Height)`.
   5. Convert pixels to PDF points using the formula below.
 
 #### 2. **Figma / Canva (Design Editors)**
@@ -126,19 +126,14 @@ NAME_Y = 270.0  # Vertical position down from top of the page
 
 ### 🧮 Conversion Formula (Pixels to PDF Points)
 
-If your image/editor gives coordinates in pixels `(X_px, Y_px)` for an image of resolution `(Image_Width, Image_Height)`:
+If your editor gives coordinates in pixels `(X_px, Y_px)` for an image of size `(Image_Width, Image_Height)`:
 
-$$ \text{NAME\_X} = \left( \frac{X_{px}}{\text{Image\_Width}} \right) \times 842 $$
+```text
+NAME_X = (X_px / Image_Width) * 842
+NAME_Y = (Y_px / Image_Height) * 595
+```
 
-$$ \text{NAME\_Y} = \left( \frac{Y_{px}}{\text{Image\_Height}} \right) \times 595 $$
-
-> **Example**:
-> If your template image is `1920 × 1357` pixels and the baseline is located at `X = 960 px`, `Y = 615 px`:
-> - $\text{NAME\_X} = (960 / 1920) \times 842 = 421.0\text{ pt}$ (exact center)
-> - $\text{NAME\_Y} = (615 / 1357) \times 595 = 269.5\text{ pt}$
-
----
-
-## 🔒 Security Best Practices
-- **Never commit `.env`**: Contains sensitive email credentials. Ensure `.env` is listed in `.gitignore`.
-- **Use `.env.example`**: Commit `.env.example` without real passwords so others know which environment variables to set.
+#### Example Calculation:
+If your template image is `1920 × 1357` pixels and the name baseline is at `X = 960 px`, `Y = 615 px`:
+- `NAME_X = (960 / 1920) * 842 = 421.0 pt` (exact center)
+- `NAME_Y = (615 / 1357) * 595 = 269.5 pt`
